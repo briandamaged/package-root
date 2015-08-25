@@ -1,0 +1,25 @@
+{
+  "name": "ppaths",
+  "version": "1.0.0",
+  "description": "Easily load package-relative paths",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/briandamaged/ppaths.git"
+  },
+  "keywords": [
+    "path"
+  ],
+  "author": "Brian Lauber",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/briandamaged/ppaths/issues"
+  },
+  "homepage": "https://github.com/briandamaged/ppaths#readme",
+  "dependencies": {
+    "stack-trace": "0.0.9"
+  }
+}
