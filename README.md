@@ -74,7 +74,7 @@ var pr = require('package-root');
 var config = pr("config");
 ```
 
-## Package-relative path joins ##
+### Package-relative path joins ###
 
 Of course, maybe you just want to obtain the path to some file in your package.  You can achieve this by using the ```join``` function:
 
