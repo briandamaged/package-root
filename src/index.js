@@ -3,7 +3,19 @@ var path       = require('path');
 var fs         = require('fs');
 var existsSync = fs.existsSync;
 
-var st     = require('stack-trace');
+var _  = require('lodash');
+var st = require('stack-trace');
+
+var marker = "__package_root";
+var marker_missing_msg = "Unable to find package root. (Could not locate " + marker + " marker)";
+
+
+// Constructs paths that are relative to the package root.
+module.exports = exports = function() {
+  var args = _.flatten([getPackageRoot(), arguments]);
+  return path.join.apply(null, args);
+}
+
 
 
 // Returns true if p is a file / folder inside
@@ -49,7 +61,7 @@ var calledFrom = exports.calledFrom = function() {
 
 
 
-
+// Cache enables faster lookup of package roots.
 var __roots = exports.__roots = {}
 
 
@@ -67,7 +79,7 @@ var __getPackageRoot = exports.__getPackageRoot = function(dir) {
 
 // Searches the filesystem to discover the package root for dir.
 function __findPackageRoot(dir) {
-  var p = path.join(dir, "__plocal");
+  var p = path.join(dir, marker);
 
   if(existsSync(p)) {
     return dir;
@@ -75,7 +87,7 @@ function __findPackageRoot(dir) {
     var nextDir = path.dirname(dir);
 
     if(nextDir === dir) {
-      throw new Error("Marker not found");
+      throw new Error(marker_missing_msg);
     }
 
     return __getPackageRoot(nextDir);

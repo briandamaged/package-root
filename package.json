@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/briandamaged/ppaths#readme",
   "dependencies": {
+    "lodash": "^3.10.1",
     "stack-trace": "0.0.9"
   }
 }
