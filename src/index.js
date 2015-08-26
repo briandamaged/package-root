@@ -10,16 +10,24 @@ var marker = "__package_root";
 var marker_missing_msg = "Unable to find package root. (Could not locate " + marker + " marker)";
 
 
+// This function serves as a package-relative
+// 'require' statement.
+module.exports = exports = function(path) {
+  return require(exports.join(path));
+}
+
+
 // Constructs paths that are relative to the package root.
-module.exports = exports = function() {
+exports.join = function() {
   var args = _.flatten([getPackageRoot(), arguments]);
   return path.join.apply(null, args);
 }
 
 
 
-// Returns true if p is a file / folder inside
-// of base.
+// Returns true if p is a file / folder inside of base.
+//
+// TODO: Move this into a separate library.
 var containsPath = exports.containsPath = function(base, p) {
   base = path.resolve(base);
   p    = path.resolve(p);
@@ -36,10 +44,10 @@ var containsPath = exports.containsPath = function(base, p) {
 
 
 
-
-
-// Returns the path to the file that is
-// using the ppaths library.
+// Returns the path to the file that is using
+// the package-root library.  (Why is this useful?
+// It gives us a starting point when we begin
+// searching for the __package_root file)
 var calledFrom = exports.calledFrom = function() {
   stack = st.get();
 
