@@ -11,9 +11,11 @@ var marker_missing_msg = "Unable to find package root. (Could not locate " + mar
 
 
 // This function serves as a package-relative
-// 'require' statement.
-module.exports = exports = function(path) {
-  return require(exports.join(path));
+// 'require' statement.  It accepts 0 or more
+// arguments, and effectively does a 'join'
+// behind the scenes.
+module.exports = exports = function() {
+  return require(exports.join.apply(null, arguments));
 }
 
 
