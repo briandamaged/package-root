@@ -77,8 +77,7 @@ var __roots = exports.__roots = {}
 
 // Finds the package root for the caller
 var getPackageRoot = exports.getPackageRoot = function() {
-  var firstDir = path.dirname(calledFrom());
-  return __getPackageRoot(firstDir)
+  return __getPackageRoot(calledFrom())
 }
 
 // Searches the cache to see if it knows the package root
